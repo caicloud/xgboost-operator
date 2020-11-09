@@ -29,7 +29,7 @@
 ROOT := github.com/kubeflow/xgboost-operator
 
 # Target binaries. You can build multiple binaries for a single project.
-TARGETS := xgboost-operator
+TARGETS := manager
 
 # Container image prefix and suffix added to targets.
 # The final built images are:
@@ -140,18 +140,14 @@ build-linux:
 	    done'
 
 container: build-linux
-	@for target in $(TARGETS); do                                                      \
-	  image=$(IMAGE_PREFIX)$${target}$(IMAGE_SUFFIX);                                  \
-	  docker build -t $(REGISTRY)/$${image}:$(VERSION)                                 \
+	image=$(IMAGE_PREFIX)xgboost-operator$(IMAGE_SUFFIX);                                  \
+	docker build -t $(REGISTRY)/$${image}:$(VERSION)                                 \
 	    --label $(DOCKER_LABELS)                                                       \
-	    -f $(BUILD_DIR)/$${target}/Dockerfile .;                                       \
-	done
+	    -f $(BUILD_DIR)/manager/Dockerfile .;
 
 push:
-	@for target in $(TARGETS); do                                                      \
-	  image=$(IMAGE_PREFIX)$${target}$(IMAGE_SUFFIX);                                  \
-	  docker push $(REGISTRY)/$${image}:$(VERSION);                                    \
-	done
+	image=$(IMAGE_PREFIX)xgboost-operator$(IMAGE_SUFFIX);                                  \
+	docker push $(REGISTRY)/$${image}:$(VERSION);
 
 update: push
 	imageName=$(IMAGE_PREFIX)xgboost-operator$(IMAGE_SUFFIX);                       \

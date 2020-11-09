@@ -2,6 +2,6 @@ FROM cargo.caicloud.xyz/library/debian:stretch
 
 LABEL maintainer="kuikuikuizzZ <wuwenhui@caicloud.io>"
 
-ADD bin/xgboost-operator /xgboost-operator
+ADD bin/manager /manager
 
-ENTRYPOINT ["/xgboost-operator"]
+ENTRYPOINT ["/manager"]
