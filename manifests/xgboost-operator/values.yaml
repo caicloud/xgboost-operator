@@ -1,0 +1,8 @@
+platformConfig:
+  imageRegistry: xxx.cargo.io
+  imageRepositoryRelease: release
+  imagePullPolicy: Always
+
+image:
+  name: xgboost-operator
+  tag: v0.1.0-20-gafa7e3c8-dirty
